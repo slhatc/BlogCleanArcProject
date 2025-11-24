@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blog.Application.Features.Blogs.Commands;
 using Blog.Application.Features.Blogs.Results;
 using Blog.Domain.Entities;
 using System;
@@ -14,6 +15,11 @@ namespace Blog.Application.Features.Blogs.Mappings
         public BlogProfile()
         {
             CreateMap<Domain.Entities.Blog,GetBlogsQueryResult>().ReverseMap();
+            CreateMap<Domain.Entities.Blog,CreateBlogCommand>().ReverseMap();
+            CreateMap<Domain.Entities.Blog,GetBlogByIdQueryResult>().ReverseMap();
+            CreateMap<Domain.Entities.Blog,UpdateBlogCommand>().ReverseMap();
+            CreateMap<Domain.Entities.Blog,GetBlogsByCategoryIdQueryResult>().ReverseMap();
+
         }
     }
 }

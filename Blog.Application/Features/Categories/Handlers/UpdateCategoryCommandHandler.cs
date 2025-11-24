@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace Blog.Application.Features.Categories.Handlers
 {
-    public class UpdateCategoryCommandHandler(IGenericRepository<Category> _repository,IMapper _mapper,IUnitOfWork _unitOfWork) : IRequestHandler<UpdateCategoryCommand, BaseResult<bool>>
+    public class UpdateCategoryCommandHandler(IGenericRepository<Category> _repository,IMapper _mapper,IUnitOfWork _unitOfWork) : IRequestHandler<UpdateCategoryCommand, BaseResult<object>>
     {
-        public async Task<BaseResult<bool>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult<object>> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = _mapper.Map<Category>(request);
             await _repository.UpdateAsync(category);
              var response = await _unitOfWork.SaveChangesAsync();
-            return response > 0 ? BaseResult<bool>.Success(true) : BaseResult<bool>.Fail();
+            return response > 0 ? BaseResult<object>.Success(category) : BaseResult<object>.Fail();
         }
     }
 }

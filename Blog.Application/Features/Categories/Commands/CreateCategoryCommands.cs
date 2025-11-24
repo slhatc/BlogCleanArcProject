@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Application.Features.Categories.Commands
 {
-    public class CreateCategoryCommands : IRequest<BaseResult<bool>>
+    public class CreateCategoryCommands : IRequest<BaseResult<object>>
     {
         public string CategoryName { get; set; }
     }

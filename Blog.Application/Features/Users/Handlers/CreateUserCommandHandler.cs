@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 
 namespace Blog.Application.Features.Users.Handlers
 {
-    public class CreateUserCommandHandler(UserManager<AppUser> _userManager,IMapper _mapper) : IRequestHandler<CreateUserCommand, BaseResult<bool>>
+    public class CreateUserCommandHandler(UserManager<AppUser> _userManager,IMapper _mapper) : IRequestHandler<CreateUserCommand, BaseResult<object>>
     {
-        public async Task<BaseResult<bool>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult<object>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = _mapper.Map<AppUser>(request);
             var result = await _userManager.CreateAsync(user, request.Password);
             if (!result.Succeeded)
             {
-                return BaseResult<bool>.Fail(result.Errors);
+                return BaseResult<object>.Fail(result.Errors);
             }
-            return BaseResult<bool>.Success(true);
+            return BaseResult<object>.Success(user);
 
         }
     }

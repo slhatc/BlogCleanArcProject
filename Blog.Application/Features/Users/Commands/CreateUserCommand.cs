@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Application.Features.Users.Commands
 {
-    public class CreateUserCommand : IRequest<BaseResult<bool>>
+    public class CreateUserCommand : IRequest<BaseResult<object>>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

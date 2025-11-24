@@ -1,4 +1,5 @@
 ﻿using Blog.Application.Features.Users.Commands;
+using Blog.Application.Features.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,14 @@ namespace Blog.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(GetLoginQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return response.IsSuccess ? Ok(response) : BadRequest(response);
+        }
+
+        [HttpPost("register")]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
             var response = await _mediator.Send(command);
